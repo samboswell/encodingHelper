@@ -1,4 +1,5 @@
 package edu.carleton.boswells;
+
 /**
  * The main model class for the EncodingHelper project in
  * CS 257, Spring 2015, Carleton College. Each object of this class
