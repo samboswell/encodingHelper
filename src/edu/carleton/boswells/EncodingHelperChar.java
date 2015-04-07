@@ -1,4 +1,6 @@
 package edu.carleton.boswells;
+import java.util.*;
+import java.io.*;
 
 /**
  * The main model class for the EncodingHelper project in
@@ -8,6 +10,7 @@ package edu.carleton.boswells;
  */
 public class EncodingHelperChar {
     private int codePoint;
+    private String hexString;
 
     public EncodingHelperChar(int codePoint) {
         this.codePoint = codePoint;
@@ -81,10 +84,11 @@ public class EncodingHelperChar {
      * @return the U+ string for this character
      */
     public String toCodePointString() {
+        hexString = Integer.toHexString(codePoint);
         // There's a method for Integer called toHexString(). It takes an
         // Integer object and prints the hex string for it. We can probably use
         // that, then just add U+ to the front.
-        return "";
+        return "U+" + hexString;
     }
     
     /**
@@ -120,6 +124,13 @@ public class EncodingHelperChar {
         // parse that out.) The document goes <codepoint>;<name>;(other crap),
         // so we want to split the string on semicolons and grab the second
         // thing. Then return it.
+        hexString = Integer.toHexString(codePoint);
+        Scanner unicodeData = new Scanner(new FileReader("UnicodeData.txt"));
+        unicodeData.useDelimiter(";");
+        String characterLine = unicodeData.findInLine(hexString);
+        String[] characterData = characterLine.split(";");
+
+
         return "";
     }
 }
