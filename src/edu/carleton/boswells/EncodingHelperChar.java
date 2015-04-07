@@ -176,12 +176,24 @@ public class EncodingHelperChar {
         // so we want to split the string on semicolons and grab the second
         // thing. Then return it.
         hexString = Integer.toHexString(codePoint);
-        Scanner unicodeData = new Scanner(new FileReader("UnicodeData.txt"));
+        Scanner unicodeData = null;
+        try{
+            unicodeData = new Scanner(new FileReader("UnicodeData.txt"));
+        }
+        catch (FileNotFoundException e){
+            System.err.println("File name not found");
+        }
         unicodeData.useDelimiter(";");
-        String characterLine = unicodeData.findInLine(hexString);
-        String[] characterData = characterLine.split(";");
-
-
-        return "";
+        String charName = null;
+        while (unicodeData.hasNextLine()) {
+            charName = unicodeData.findInLine(hexString);
+            if (charName != null) {
+                break; }
+            unicodeData.nextLine();
+        }
+        if (charName == null) { return "Code point is invalid. No character name generated";
+        }
+        String[] charNameArray = charName.split(";");
+        return charNameArray[1];
     }
 }
