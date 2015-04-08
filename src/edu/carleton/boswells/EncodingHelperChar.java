@@ -18,31 +18,30 @@ public class EncodingHelperChar {
     
     public EncodingHelperChar(byte[] utf8Bytes) {
         if (utf8Bytes.length == 1) {
-            //Byte has format 0xxxxxxx
-            //Gather the xes and save. I don't think we need to make it hex?
+            this.codePoint = utf8Bytes[0];
         } else if (utf8Bytes.length == 2) {
+            this.codePoint = ((utf8Bytes[0] & 0x1F) << 6) + (utf8Bytes[1] & 0x3F);
             //Bytes have format 110xxxxx 10xxxxxx
-            //Gather the xes and save. I don't think we need to make it hex?
         } else if (utf8Bytes.length == 3) {
+            this.codePoint = ((utf8Bytes[0] & 0xF) << 12) + ((utf8Bytes[1] & 0x3F) << 6) + (utf8Bytes[2] & 0x3F);
             //Bytes have format 1110xxxx 10xxxxxx 10xxxxxx
-            //Gather the xes and save. I don't think we need to make it hex?
         } else if (utf8Bytes.length == 4) {
+            this.codePoint = ((utf8Bytes[0] & 0x7) << 18) + ((utf8Bytes[1] & 0x3F) << 12) + ((utf8Bytes[2] & 0x3F) << 6) + (utf8Bytes[3] & 0x3F);
             //Bytes have format 11110xxx 10xxxxxx 10xxxxxx 10xxxxx
-            //Gather the xes and save. I don't think we need to make it hex?
         } else if (utf8Bytes.length == 5) {
+            this.codePoint = ((utf8Bytes[0] & 0x3) << 24) + ((utf8Bytes[1] & 0x3F) << 18) + ((utf8Bytes[2] & 0x3F) << 12) + ((utf8Bytes[3] & 0x3F) << 6) + (utf8Bytes[4] & 0x3F);
             //Bytes have format 111110xx 10xxxxxx 10xxxxxx 10xxxxx 10xxxxxx
             //Gather the xes and save. I don't think we need to make it hex?
         } else if (utf8Bytes.length == 6) {
-            //Bytes have format 1111110x 10xxxxxx 10xxxxxx 10xxxxx 10xxxxxx10xxxxxx
-            //Gather the xes and save. I don't think we need to make it hex?
+            this.codePoint = ((utf8Bytes[0] & 0x1) << 30) + ((utf8Bytes[1] & 0x3F) << 24) + ((utf8Bytes[2] & 0x3F) << 18) + ((utf8Bytes[3] & 0x3F) << 12) + ((utf8Bytes[4] & 0x3F) << 6) + (utf8Bytes[5] & 0x3F);
         } else {
-            //Error
+            this.codePoint = 0x03C0 //I wanted an error case and I like pi.
         }
     }
     
     public EncodingHelperChar(char ch) {
-        // I BELIEVE that you can literally just convert a char to an int to get
-        //the code point. We'll see!
+        chStr = Character.toString(ch);
+        this.codepoint = chStr.codePointAt(0);
     }
     
     public int getCodePoint() {
