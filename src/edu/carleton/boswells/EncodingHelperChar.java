@@ -63,15 +63,66 @@ public class EncodingHelperChar {
      * @return the UTF-8 byte array for this character
      */
     public byte[] toUtf8Bytes() {
-        //Check size of codepoint:
-        //if codepoint < 128 { [0xxxxxxx] }
-        //else if codepoint < 2048 { [110xxxxx, 10xxxxxx] }
-        //else if codepoint < 65536 { [1110xxxx, 10xxxxxx, 10xxxxxx] }
-        //else if codepoint < 2097152 { [11110xxx, 10xxxxxx, 10xxxxxx, 10xxxxxx] }
-        //else if codepoint < 67108864 { [111110xx, 10xxxxxx, 10xxxxxx, 10xxxxxx, 10xxxxxx] }
-        //else { [1111110x, 10xxxxxx, 10xxxxxx, 10xxxxxx, 10xxxxxx, 10xxxxxx] }
-
-        return null;
+        if (codePoint < 0x80) { //if codepoint < 128 { [0xxxxxxx] }
+            byte[] arrayOfBytes = new byte[1];
+            arrayOfBytes[0] = (byte) codePoint;
+            return arrayOfBytes;
+        } else if (codePoint < 0x800) { //[110xxxxx, 10xxxxxx]
+            byte[] arrayOfBytes = new byte[2];
+            int firstInt = ((codePoint & 0x7C0) >> 6) + 0xC0;
+            arrayOfBytes[0] = (byte) firstInt;
+            int secondInt = (codePoint & 0x3F) + 0x80;
+            arrayOfBytes[1] = (byte) secondInt;
+            return arrayOfBytes;
+        } else if (codePoint < 0x10000) { //[1110xxxx, 10xxxxxx, 10xxxxxx]
+            byte[] arrayOfBytes = new byte[3];
+            int firstInt = ((codePoint & 0xF000) >> 12) + 0xE0;
+            arrayOfBytes[0] = (byte) firstInt;
+            int secondInt = ((codePoint & 0xFC0) >> 6) + 0x80;
+            arrayOfBytes[1] = (byte) secondInt;
+            int thirdInt = (codePoint & 0x3F) + 0x80;
+            arrayOfBytes[2] = (byte) thirdInt;
+            return arrayOfBytes;
+        } else if (codePoint < 0x200000) { //[11110xxx, 10xxxxxx, 10xxxxxx, 10xxxxxx]
+            byte[] arrayOfBytes = new byte[4];
+            int firstInt = ((codePoint & 0x1C0000) >> 18) + 0xF0;
+            arrayOfBytes[0] = (byte) firstInt;
+            int secondInt = ((codePoint & 0x3F000) >> 12) + 0x80;
+            arrayOfBytes[1] = (byte) secondInt;
+            int thirdInt = ((codePoint & 0xFC0) >> 6) + 0x80;
+            arrayOfBytes[2] = (byte) thirdInt;
+            int fourthInt = (codePoint & 0x3F) + 0x80;
+            arrayOfBytes[3] = (byte) fourthInt;
+            return arrayOfBytes;
+        } else if (codePoint < 0x4000000) { //[111110xx, 10xxxxxx, 10xxxxxx, 10xxxxxx, 10xxxxxx]
+            byte[] arrayOfBytes = new byte[5];
+            int firstInt = ((codePoint & 0x3000000) >> 24) + 0xF8;
+            arrayOfBytes[0] = (byte) firstInt;
+            int secondInt = ((codePoint & 0xFC0000) >> 18) + 0x80;
+            arrayOfBytes[1] = (byte) secondInt;
+            int thirdInt = ((codePoint & 0x3F000) >> 12) + 0x80;
+            arrayOfBytes[2] = (byte) thirdInt;
+            int fourthInt = ((codePoint & 0xFC0) >> 6) + 0x80;
+            arrayOfBytes[3] = (byte) fourthInt;
+            int fifthInt = (codePoint & 0x3F) + 0x80;
+            arrayOfBytes[4] = (byte) fifthInt;
+            return arrayOfBytes;
+        } else { //[1111110x, 10xxxxxx, 10xxxxxx, 10xxxxxx, 10xxxxxx, 10xxxxxx]
+            byte[] arrayOfBytes = new byte[6];
+            int firstInt = ((codePoint & 0x40000000) >> 30) + 0xFC;
+            arrayOfBytes[0] = (byte) firstInt;
+            int secondInt = ((codePoint & 0x3F000000) >> 24) + 0x80;
+            arrayOfBytes[1] = (byte) secondInt;
+            int thirdInt = ((codePoint & 0xFC0000) >> 18) + 0x80;
+            arrayOfBytes[2] = (byte) thirdInt;
+            int fourthInt = ((codePoint & 0x3F000) >> 12) + 0x80;
+            arrayOfBytes[3] = (byte) fourthInt;
+            int fifthInt = ((codePoint & 0xFC0) >> 6) + 0x80;
+            arrayOfBytes[4] = (byte) fifthInt;
+            int sixthInt = (codePoint & 0x3F) + 0x80;
+            arrayOfBytes[5] = (byte) sixthInt;
+            return arrayOfBytes;
+        }
     }
     
     /**
@@ -125,12 +176,24 @@ public class EncodingHelperChar {
         // so we want to split the string on semicolons and grab the second
         // thing. Then return it.
         hexString = Integer.toHexString(codePoint);
-        Scanner unicodeData = new Scanner(new FileReader("UnicodeData.txt"));
+        Scanner unicodeData = null;
+        try{
+            unicodeData = new Scanner(new FileReader("UnicodeData.txt"));
+        }
+        catch (FileNotFoundException e){
+            System.err.println("File name not found");
+        }
         unicodeData.useDelimiter(";");
-        String characterLine = unicodeData.findInLine(hexString);
-        String[] characterData = characterLine.split(";");
-
-
-        return "";
+        String charName = null;
+        while (unicodeData.hasNextLine()) {
+            charName = unicodeData.findInLine(hexString);
+            if (charName != null) {
+                break; }
+            unicodeData.nextLine();
+        }
+        if (charName == null) { return "Code point is invalid. No character name generated";
+        }
+        String[] charNameArray = charName.split(";");
+        return charNameArray[1];
     }
 }
