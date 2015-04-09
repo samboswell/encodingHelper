@@ -1,4 +1,5 @@
 package edu.carleton.boswells;
+import org.junit.Rule;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -7,49 +8,46 @@ import static org.junit.Assert.*;
  * Created by Sam Boswell and Michael Stoneman, last edited on 4/5/15.
  */
 public class EncodingHelperCharTest {
-    /**
-     @Test
-     public void EncodingHelperChar(char ch) throws Exception {
-     EncodingHelperChar T1 = new EncodingHelperChar('?');
+    @Test(expected = IllegalArgumentException.class)
+    public void EncodingHelperCharChar() throws Exception {
+        EncodingHelperChar T1 = new EncodingHelperChar('?');
 
-     }
+    }
 
-     @Test
-     public void EncodingHelperCharShouldReturnInvalid(char ch) throws Exception {
+    @Test (expected = IllegalArgumentException.class)
+    public void EncodingHelperCharShouldReturnInvalid() throws Exception {
 
 
-     }
+    }
+    @Test(expected = IllegalArgumentException.class)
+    public void EncodingHelperCharInt() throws Exception {
+        EncodingHelperChar T1 = new EncodingHelperChar(0xA5);
+        assertEquals(T1.getCodePoint(), 0xA5);
+    }
 
-     @Test
-     public void EncodingHelperChar(int codePoint) throws Exception {
-     EncodingHelperChar T1 = new EncodingHelperChar(0xA5);
-     assertEquals(T1.getCodePoint(), 0xA5);
-     }
+    @Test(expected = IllegalArgumentException.class)
+    public void EncodingHelperCharInvalidInt() throws Exception {
+        EncodingHelperChar T2 = new EncodingHelperChar(0x10FFFF);
+        assertEquals("No message","Code point is out of bounds (either too high or too low)", "Code point is out of bounds (either too high or too low)");
+    }
 
-     @Test
-     public void EncodingHelperCharInvalidInt(int codePoint) throws Exception {
-     EncodingHelperChar T2 = new EncodingHelperChar(0x10FFFF);
-     assertEquals("Invalid int - too high","IllegalArgumentException - int is too large", "IllegalArgumentException - int is too large");
-     }
+    @Test(expected = IllegalArgumentException.class)
+    public void EncodingHelperCharNegativeInt() throws Exception {
+        EncodingHelperChar T3 = new EncodingHelperChar(-0x80);
+        assertEquals("No message","Code point is out of bounds (either too high or too low)", "Code point is out of bounds (either too high or too low)");
+    }
 
-     @Test
-     public void EncodingHelperCharNegativeInt(int codePoint) throws Exception {
-     EncodingHelperChar T3 = new EncodingHelperChar(-0x80);
-     assertEquals("Invalid int - too high","IllegalArgumentException - int is too large", "IllegalArgumentException - int is too large");
-     }
+    @Test(expected = IllegalArgumentException.class)
+    public void EncodingHelperCharInvalidByteTypeShouldReturnInvalid() throws Exception {
+        EncodingHelperChar T4 = new EncodingHelperChar(0x10FFFF);
 
-     @Test
-     public void EncodingHelperCharInvalidByteTypeShouldReturnInvalid(byte[] utf8Bytes) throws Exception {
-     EncodingHelperChar T4 = new EncodingHelperChar(0x10FFFF);
+    }
 
-     }
-
-     @Test
-     public void EncodingHelperChar(byte[] utf8Bytes) throws Exception {
-     EncodingHelperChar T5 = new EncodingHelperChar(0xA5);
-
-     }
-     */
+    @Test(expected = IllegalArgumentException.class)
+    public void EncodingHelperCharByte() throws Exception {
+        EncodingHelperChar T5 = new EncodingHelperChar(0xA5);
+        assertEquals("No message", "Byte array doesn't correspond to a valid Unicode character.", "Byte array doesn't correspond to a valid Unicode character.");
+    }
 
     @Test
     /**
@@ -80,17 +78,18 @@ public class EncodingHelperCharTest {
      */
     public void testToUtf8Bytes() throws Exception {
         EncodingHelperChar test3 = new EncodingHelperChar(0xA5);
-        byte[] utf8Bytes = new byte[]{(byte) 194, (byte) 164};
+        byte[] utf8Bytes = new byte[]{(byte) 0xc2, (byte) 0xa5};
         assertArrayEquals("Failure - incorrect UTF-8 bytes", utf8Bytes, test3.toUtf8Bytes());
     }
-    /** @Test
-    public void testToUtf8BytesLength2() throws Exception {
-    EncodingHelperChar test3 = new EncodingHelperChar(0x80);
-    byte[] utf8Bytes = [11000010 10100100];
-    assertArrayEquals("Failure - incorrect UTF-8 bytes", utf8Bytes, test3.toUtf8Bytes());
+    @Test
+    public void testToUtf8BytesLength3() throws Exception {
+        EncodingHelperChar test3 = new EncodingHelperChar(0xFBA);
+        byte[] utf8Bytes = new byte[]{(byte) 0xe0, (byte)0xbe, (byte)0xba};
+        assertArrayEquals("Failure - incorrect UTF-8 bytes", utf8Bytes, test3.toUtf8Bytes());
     }
+    /**
      @Test
-     public void testToUtf8BytesLength3() throws Exception {
+     public void testToUtf8BytesLength2) throws Exception {
      EncodingHelperChar test3 = new EncodingHelperChar(0x800);
      byte[] utf8Bytes = [11000010 10100100];
      assertArrayEquals("Failure - incorrect UTF-8 bytes", utf8Bytes, test3.toUtf8Bytes());
@@ -98,18 +97,6 @@ public class EncodingHelperCharTest {
      @Test
      public void testToUtf8BytesLength4() throws Exception {
      EncodingHelperChar test3 = new EncodingHelperChar(0x10000);
-     byte[] utf8Bytes = [11000010 10100100];
-     assertArrayEquals("Failure - incorrect UTF-8 bytes", utf8Bytes, test3.toUtf8Bytes());
-     }
-     @Test
-     public void testToUtf8BytesLength5() throws Exception {
-     EncodingHelperChar test3 = new EncodingHelperChar(0x200000);
-     byte[] utf8Bytes = [11000010 10100100];
-     assertArrayEquals("Failure - incorrect UTF-8 bytes", utf8Bytes, test3.toUtf8Bytes());
-     }
-     @Test
-     public void testToUtf8BytesLength6() throws Exception {
-     EncodingHelperChar test3 = new EncodingHelperChar(0x4000000);
      byte[] utf8Bytes = [11000010 10100100];
      assertArrayEquals("Failure - incorrect UTF-8 bytes", utf8Bytes, test3.toUtf8Bytes());
      }

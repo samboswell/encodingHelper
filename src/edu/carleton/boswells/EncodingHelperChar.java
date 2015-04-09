@@ -13,7 +13,7 @@ public class EncodingHelperChar {
     private String hexString;
 
     public EncodingHelperChar(int codePoint) {
-        if (0 < codePoint && codePoint < (0x10FFFF)) {
+        if (0 <= codePoint && codePoint < (0x10FFFF)) {
             this.codePoint = codePoint;
         }
         else {
@@ -22,22 +22,30 @@ public class EncodingHelperChar {
     }
 
     public EncodingHelperChar(byte[] utf8Bytes) {
-        if (utf8Bytes.length == 1) {
+        //We test the number of ones by XORing with predetermined bytes.
+        byte isOneXOR = (byte) 0;
+        byte isTwoXOR = (byte) 0xC0;
+        byte isThreeXOR = (byte) 0xE0;
+        byte isFourXOR = (byte) 0xF0;
+        if (utf8Bytes.length == 1 && (utf8Bytes[0] ^ isOneXOR) < 0x80) {
             this.codePoint = utf8Bytes[0];
-        } else if (utf8Bytes.length == 2) {
+        } else if (utf8Bytes.length == 2 && (utf8Bytes[0] ^ isTwoXOR) < 0x40) {
             this.codePoint = ((utf8Bytes[0] & 0x1F) << 6) + (utf8Bytes[1] & 0x3F);
             //Bytes have format 110xxxxx 10xxxxxx
-        } else if (utf8Bytes.length == 3) {
+        } else if (utf8Bytes.length == 3 && (utf8Bytes[0] ^ isThreeXOR) < 0x20) {
             this.codePoint = ((utf8Bytes[0] & 0xF) << 12) + ((utf8Bytes[1] & 0x3F) << 6) + (utf8Bytes[2] & 0x3F);
             //Bytes have format 1110xxxx 10xxxxxx 10xxxxxx
-        } else if (utf8Bytes.length == 4) {
+        } else if (utf8Bytes.length == 4 && (utf8Bytes[0] ^ isFourXOR) < 0x10) {
             this.codePoint = ((utf8Bytes[0] & 0x7) << 18) + ((utf8Bytes[1] & 0x3F) << 12) + ((utf8Bytes[2] & 0x3F) << 6) + (utf8Bytes[3] & 0x3F);
             //Bytes have format 11110xxx 10xxxxxx 10xxxxxx 10xxxxx
         } else {
             this.codePoint = 0x03C0; //I wanted an error case and I like pi.
         }
-    }
 
+        if (this.codePoint >= 0x10FFFF) {
+            throw new IllegalArgumentException("Byte array doesn't correspond to a valid Unicode character.");
+        }
+    }
 
     public EncodingHelperChar(char ch) {
         this.codePoint = Character.getNumericValue(ch);
@@ -156,27 +164,31 @@ public class EncodingHelperChar {
         // so we want to split the string on semicolons and grab the second
         // thing. Then return it.
         hexString = String.format("%04X", codePoint);
-        String charName = null;
-        //String finalCharName = null;
-        String[] charNameArray = null;
+        String charValue = null;
+        String charLine = null;
+        String[] charArray = null;
 
         try{
             Scanner unicodeData = new Scanner(new FileReader("src/edu/carleton/boswells/UnicodeData.txt"));
-            unicodeData.useDelimiter(";");
+            //unicodeData.useDelimiter(";");
             while (unicodeData.hasNextLine()) {
-                charName = unicodeData.findInLine(hexString);
-                if (charName != null) {
+                charLine = unicodeData.nextLine();
+                if(charLine.contains(hexString)) {
+                    charArray = charLine.split(";");
+                    charValue = charArray[1];
                     break;
                 }
                 unicodeData.nextLine();
             }
-            if (charName == null) { return "Code point is unassigned. No character name generated";
+            if (charValue == null) { return "<unknown> U+" + hexString;
             }
         }
         catch (FileNotFoundException e){
             System.err.println("File name not found");
         }
-
-        return charName;
+        if ((codePoint < 0x1F) || (codePoint > 0x7F && codePoint < 0xA0)) {
+            return charValue + " " + charArray[10];
+        }
+        return charValue;
     }
 }
