@@ -13,7 +13,7 @@ public class EncodingHelperChar {
     private String hexString;
 
     public EncodingHelperChar(int codePoint) {
-        if (0 <= codePoint && codePoint < (0x10FFFF)) {
+        if (0 <= codePoint && codePoint < (0x10FFFF)) { //See if the code point lies in the valid region, return error if it doesnt.
             this.codePoint = codePoint;
         }
         else {
@@ -48,13 +48,11 @@ public class EncodingHelperChar {
     }
 
     public EncodingHelperChar(char ch) {
-        this.codePoint = Character.getNumericValue(ch);
-        if (0 > codePoint || codePoint > (0x10FFFF)) {
+        char[] chArray = {ch};
+        this.codePoint = Character.codePointAt(chArray,0); //converts the char into the corresponding Unicode int.
+        if (0 > codePoint || codePoint > (0x10FFFF)) { //the acceptable ranges for the int to be in.
             throw new IllegalArgumentException("Code point is out of bounds (either too high or too low)");
         }
-
-        // I BELIEVE that you can literally just convert a char to an int to get
-        //the code point. We'll see!
     }
 
     public int getCodePoint() {
@@ -74,7 +72,7 @@ public class EncodingHelperChar {
      *
      * @return the UTF-8 byte array for this character
      */
-    public byte[] toUtf8Bytes() {
+    public byte[] toUtf8Bytes() { //code is segmented by length of eventual byte string
         byte[] arrayOfBytes = null;
         if (codePoint < 0x80) { //if codepoint < 128 { [0xxxxxxx] }
             arrayOfBytes = new byte[1];
@@ -117,10 +115,7 @@ public class EncodingHelperChar {
      * @return the U+ string for this character
      */
     public String toCodePointString() {
-        hexString = String.format("U+%04X", codePoint);
-        // There's a method for Integer called toHexString(). It takes an
-        // Integer object and prints the hex string for it. We can probably use
-        // that, then just add U+ to the front.
+        hexString = String.format("U+%04X", codePoint); //Used the formatting Jadrian used in his test example
         return hexString;
     }
 
@@ -137,13 +132,10 @@ public class EncodingHelperChar {
     public String toUtf8String() {
         byte[] encodingArray = toUtf8Bytes();
         String encodingString = "";
-        for (int i = 0; i < encodingArray.length; i++) {
+        for (int i = 0; i < encodingArray.length; i++) { //Converts each array of bytes to string systematically
             String encodedByte = String.format("\\x%02X", encodingArray[i]);
             encodingString = encodingString.concat(encodedByte);
         }
-        // This one's iffier for me. We could use toUtf8Bytes, then somehow turn
-        // the byte into an int, then use the toHexString() method, then parse
-        // it to add the slashes and xes and such?
         return encodingString;
     }
 
@@ -156,39 +148,31 @@ public class EncodingHelperChar {
      * @return this character's Unicode name
      */
     public String getCharacterName() {
-        // We're going to need to load UnicodeData.txt as a file and use a
-        // scanner to look through it.
-        // I feel like we should just call toCodePointString(), then search for
-        // that (though it doesn't have a U+ in the document so we'll have to
-        // parse that out.) The document goes <codepoint>;<name>;(other crap),
-        // so we want to split the string on semicolons and grab the second
-        // thing. Then return it.
         hexString = String.format("%04X", codePoint);
-        String charValue = null;
-        String charLine = null;
+        String charName = null;
         String[] charArray = null;
 
         try{
             Scanner unicodeData = new Scanner(new FileReader("src/edu/carleton/boswells/UnicodeData.txt"));
-            //unicodeData.useDelimiter(";");
+            unicodeData.useDelimiter(";");
             while (unicodeData.hasNextLine()) {
-                charLine = unicodeData.nextLine();
-                if(charLine.contains(hexString)) {
-                    charArray = charLine.split(";");
-                    charValue = charArray[1];
+                charName = unicodeData.findInLine(hexString); //use the String format to find the code point in the file.
+                if(charName != null) { //when we find the code point,
+                    String charLine = unicodeData.nextLine(); //take that line,
+                    charArray = charLine.split(";"); //and split it.
                     break;
                 }
                 unicodeData.nextLine();
             }
-            if (charValue == null) { return "<unknown> U+" + hexString;
+            if (charName == null) { return "<unknown> U+" + hexString; //return for <unknown> code points
             }
         }
         catch (FileNotFoundException e){
             System.err.println("File name not found");
         }
-        if ((codePoint < 0x1F) || (codePoint > 0x7F && codePoint < 0xA0)) {
-            return charValue + " " + charArray[10];
+        if ((codePoint < 0x20) || codePoint >= 0x7F && codePoint < 0xA0) { //return for <control> code points
+            return  charArray[1] + " " + charArray[10];
         }
-        return charValue;
+        return charArray[1]; //return for all other code points
     }
 }

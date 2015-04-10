@@ -8,45 +8,62 @@ import static org.junit.Assert.*;
  * Created by Sam Boswell and Michael Stoneman, last edited on 4/5/15.
  */
 public class EncodingHelperCharTest {
-    @Test(expected = IllegalArgumentException.class)
+
+    @Test
+    /**
+     * Tests calling EncodingHelperChar with a char.
+     * @exception it can't do anything with the char (which should be impossible?).
+     */
     public void EncodingHelperCharChar() throws Exception {
         EncodingHelperChar T1 = new EncodingHelperChar('?');
-
+        assertEquals("Wrong code point output.", 0x3F, T1.getCodePoint());
     }
 
-    @Test (expected = IllegalArgumentException.class)
-    public void EncodingHelperCharShouldReturnInvalid() throws Exception {
-
-
-    }
-    @Test(expected = IllegalArgumentException.class)
+    @Test
+    /**
+     * Tests calling EncodingHelperChar with an int.
+     * @exception the codePoint given does not match the output of getCodePut.
+     */
     public void EncodingHelperCharInt() throws Exception {
         EncodingHelperChar T1 = new EncodingHelperChar(0xA5);
         assertEquals(T1.getCodePoint(), 0xA5);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
+    /**
+     * Tests calling EncodingHelperChar with an invalid high int.
+     * @exception should throw an IllegalArgumentException.
+     */
     public void EncodingHelperCharInvalidInt() throws Exception {
-        EncodingHelperChar T2 = new EncodingHelperChar(0x10FFFF);
-        assertEquals("No message","Code point is out of bounds (either too high or too low)", "Code point is out of bounds (either too high or too low)");
+        try {
+            EncodingHelperChar T2 = new EncodingHelperChar(0x10FFFF);
+        } catch (IllegalArgumentException expectedException) {
+        }
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
+    /**
+     * Tests calling EncodingHelperChar with a char.
+     * @exception should throw an IllegalArgumentException.
+     **/
     public void EncodingHelperCharNegativeInt() throws Exception {
-        EncodingHelperChar T3 = new EncodingHelperChar(-0x80);
-        assertEquals("No message","Code point is out of bounds (either too high or too low)", "Code point is out of bounds (either too high or too low)");
+        try {
+            EncodingHelperChar T3 = new EncodingHelperChar(-0x80);
+        } catch (IllegalArgumentException expectedException) {
+        }
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
+    /**
+     * Tests calling EncodingHelperChar with an invalid byte string(one that is too high).
+     * @exception should throw an IllegalArgumentException.
+     */
     public void EncodingHelperCharInvalidByteTypeShouldReturnInvalid() throws Exception {
-        EncodingHelperChar T4 = new EncodingHelperChar(0x10FFFF);
 
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void EncodingHelperCharByte() throws Exception {
-        EncodingHelperChar T5 = new EncodingHelperChar(0xA5);
-        assertEquals("No message", "Byte array doesn't correspond to a valid Unicode character.", "Byte array doesn't correspond to a valid Unicode character.");
+        try {
+            EncodingHelperChar T4 = new EncodingHelperChar(0x10FFFF);
+        } catch (IllegalArgumentException expectedException) {
+        }
     }
 
     @Test
@@ -81,32 +98,18 @@ public class EncodingHelperCharTest {
         byte[] utf8Bytes = new byte[]{(byte) 0xc2, (byte) 0xa5};
         assertArrayEquals("Failure - incorrect UTF-8 bytes", utf8Bytes, test3.toUtf8Bytes());
     }
+
     @Test
+    /**
+     * Tests converting longer code points to UTF-8 bytes for EncodingHelperChar.
+     * @exception the code point does not convert correctly to UTF-8 bytes.
+     */
     public void testToUtf8BytesLength3() throws Exception {
         EncodingHelperChar test3 = new EncodingHelperChar(0xFBA);
         byte[] utf8Bytes = new byte[]{(byte) 0xe0, (byte)0xbe, (byte)0xba};
         assertArrayEquals("Failure - incorrect UTF-8 bytes", utf8Bytes, test3.toUtf8Bytes());
     }
-    /**
-     @Test
-     public void testToUtf8BytesLength2) throws Exception {
-     EncodingHelperChar test3 = new EncodingHelperChar(0x800);
-     byte[] utf8Bytes = [11000010 10100100];
-     assertArrayEquals("Failure - incorrect UTF-8 bytes", utf8Bytes, test3.toUtf8Bytes());
-     }
-     @Test
-     public void testToUtf8BytesLength4() throws Exception {
-     EncodingHelperChar test3 = new EncodingHelperChar(0x10000);
-     byte[] utf8Bytes = [11000010 10100100];
-     assertArrayEquals("Failure - incorrect UTF-8 bytes", utf8Bytes, test3.toUtf8Bytes());
-     }
-     @Test
-     public void testToUtf8BytesOutsideOfBounds() throws Exception {
-     EncodingHelperChar test3 = new EncodingHelperChar(0x11000000);
-     byte[] utf8Bytes = [11000010 10100100];
-     assertArrayEquals("Failure - incorrect UTF-8 bytes", utf8Bytes, test3.toUtf8Bytes());
-     }
-     */
+
     @Test
     /**
      * Tests outputting the code point in a string format for EncodingHelperChar.
@@ -127,11 +130,6 @@ public class EncodingHelperCharTest {
         EncodingHelperChar test5 = new EncodingHelperChar(0xA5);
         assertEquals("Failure - incorrect Utf8 string", "\\xC2\\xA5", test5.toUtf8String() );
     }
-    @Test
-    public void testToUtf8String3() throws Exception {
-        EncodingHelperChar test5 = new EncodingHelperChar(0xA5);
-        assertEquals("Failure - incorrect Utf8 string", "\\xC2\\xA5", test5.toUtf8String() );
-    }
 
     @Test
     /**
@@ -145,18 +143,33 @@ public class EncodingHelperCharTest {
     }
 
     @Test
+    /**
+     * Tests outputting the character name for a given code point in the lower control range in EncodingHelperChar.
+     * @exception if the character name output is not the same as the given code point's
+     * character name.
+     */
     public void testGetCharacterNameForControlCharacters() throws Exception {
         EncodingHelperChar test6 = new EncodingHelperChar(0x1A);
         assertEquals("Failure - incorrect character name", "<control> SUBSTITUTE", test6.getCharacterName());
     }
 
     @Test
+    /**
+     * Tests outputting the character name for a given code point in the higher control range in EncodingHelperChar.
+     * @exception if the character name output is not the same as the given code point's
+     * character name.
+     */
     public void testGetCharacterNameForHigherRangeControlCharacters() throws Exception {
         EncodingHelperChar test6 = new EncodingHelperChar(0x9F);
-        assertEquals("Failure - incorrect character name", "<control> APPLICATION CONTROL COMMAND", test6.getCharacterName());
+        assertEquals("Failure - incorrect character name", "<control> APPLICATION PROGRAM COMMAND", test6.getCharacterName());
     }
 
     @Test
+    /**
+     * Tests outputting the character name for a given code point that is unknown in EncodingHelperChar.
+     * @exception if the character name output is not the same as the given code point's
+     * character name.
+     */
     public void testGetCharacterNameForUnknownCharacters() throws Exception {
         EncodingHelperChar test6 = new EncodingHelperChar(0x3FFF);
         assertEquals("Failure - incorrect character name", "<unknown> U+3FFF", test6.getCharacterName());
