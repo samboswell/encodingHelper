@@ -1,9 +1,17 @@
 package edu.carleton.boswells;
+import java.util.Arrays;
 
 /**
  * Created by stonemanm on 4/11/15.
  */
 public class EncodingHelper {
+    private String inputType = "string";
+    private String outputType = "summary";
+    private int startingPoint = 0;
+    private EncodingHelperChar[] cpArray = null;
+
+    public EncodingHelper() {}
+
     /**
      * Prints the help info.
      */
@@ -17,10 +25,6 @@ public class EncodingHelper {
         System.out.println(info);
     }
 
-    public EncodingHelper() {
-
-    }
-
     /**
      * FOR STRING INPUT
      * Takes a given string and creates an EncodingHelperChar from each of the
@@ -31,7 +35,7 @@ public class EncodingHelper {
     public EncodingHelperChar[] readFromString(String s) {
         EncodingHelperChar[] codepoints = new EncodingHelperChar[s.length()];
         for (int i = 0; i < s.length(); i++) {
-            codepoints[i] = EncodingHelperChar(s.charAt(i));
+            codepoints[i] = new EncodingHelperChar(s.charAt(i));
         }
         return codepoints;
     }
@@ -97,13 +101,9 @@ public class EncodingHelper {
      */
     public String writeToString(EncodingHelperChar[] codepoints) {
         String output = "";
-        // Do we have a way to get a char from a codepoint?
-        // Regardless, we iterate through codepoints and construct a string:
-        //
-        //for thing in thing
-        //    make it a char
-        //    output = output + that char
-
+        for (EncodingHelperChar codepoint : codepoints) {
+            output += Character.getName(codepoint.getCodePoint());
+        }
         return output;
     }
 
@@ -152,56 +152,63 @@ public class EncodingHelper {
      */
     public static void main(String[] args) {
         EncodingHelper EH = new EncodingHelper();
-        String inputType = "string";
-        String outputType = "summary";
-        int startingPoint = 0;
         if (args.length == 0 || args[0].compareTo("-h") == 0 || args[0].compareTo("--help") == 0) {
             EH.useInformation();
             System.exit(1);
-            //Run the help function and quit.
         }
         int i = 0;
         while (i < args.length) {
-            if (args[i].compareTo("-i") = 0 || args[i].compareTo("--input") = 0) {
+            if (args[i].compareTo("-i") == 0 || args[i].compareTo("--input") == 0) {
                 i++;
-                inputType = args[i];
+                EH.inputType = args[i];
                 i++;
-                startingPoint += 2;
-            } else if (args[i].compareTo("-o") = 0 || args[i].compareTo("--output") = 0) {
+                EH.startingPoint += 2;
+            } else if (args[i].compareTo("-o") == 0 || args[i].compareTo("--output") == 0) {
                 i++;
-                outputType = args[i];
+                EH.outputType = args[i];
                 i++;
-                startingPoint += 2;
+                EH.startingPoint += 2;
             }
         }
-        
+        String[] inArgs = null;
+        try {
+            inArgs = Arrays.copyOfRange(args, EH.startingPoint, args.length);
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("There was an error with your input.");
+            EH.useInformation();
+            System.exit(1);
+        }
 
-        // I think the best way to read the args is to iterate through them and
-        // search for an "-i", "--input", "-o", or "--output".
-        // If any are found, we can save the next value and work with it – for
-        // instance, if args[2] = "-i", then we run inputType = args[3].
-        // If the tags aren't found, or if it fails to parse the input well, we
-        // run the default case.
-        //
-        // To be honest, this shouldn't be terrible. Construct an object for
-        // each char/byte/etc, using the appropriate constructor, and then give
-        // the appropriate output.
-        //
-        // Oh, and if the args are empty, we give the usage case. We should also
-        // display it on a -h or --help, which means it should be a separate
-        // method.
+        //Run an input function!
+        if (EH.inputType.toLowerCase().compareTo("utf8") == 0) {
+            EH.cpArray = EH.readFromUTF8(inArgs[0]);
+        } else if (EH.inputType.toLowerCase().compareTo("codepoint") == 0) {
+            EH.cpArray = EH.readFromCodepoints(inArgs);
+        } else { //If the input is expressed differently, we assume it's string.
+            EH.cpArray = EH.readFromString(inArgs[0]);
+        }
 
+        //By now we have EH.cpArray! So output...
 
-        // I think that's it for the methods we need! If you see any more, add
-        // them. If not, would you mind coming up with the tests for them? I
-        // figure after we have tests, we can meet tomorrow or work individually
-        // and actually write the methods out.
-
-        // One more thing to note. I'm bad at knowing what should be static and
-        // what needs a constructor. If you see something that looks wrong on
-        // that front, don't hesitate to change it.
-        //
-        // Best of luck!
-        // -Michael
+        if (EH.outputType.toLowerCase().compareTo("string") == 0) {
+            System.out.println(EH.writeToString(EH.cpArray));
+        } else if (EH.outputType.toLowerCase().compareTo("utf8") == 0) {
+            System.out.println(EH.writeToUTF8(EH.cpArray));
+        } else if (EH.outputType.toLowerCase().compareTo("codepoint") == 0) {
+            System.out.println(EH.writeToCodepoints(EH.cpArray));
+        } else {
+            String output = "";
+            if (EH.cpArray.length == 1) {
+                output += "Character: " + EH.writeToString(EH.cpArray) + "\n";
+            } else {
+                output += "String: " + EH.writeToString(EH.cpArray) + "\n";
+            }
+            output += "Code point: " + EH.writeToUTF8(EH.cpArray) + "\n";
+            if (EH.cpArray.length == 1) {
+                output += "Name: " + EH.cpArray[0].getCharacterName() + "\n";
+            }
+            output += "UTF8: " + EH.writeToCodepoints(EH.cpArray);
+            System.out.println(output);
+        }
     }
 }
