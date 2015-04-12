@@ -70,6 +70,25 @@ public class EncodingHelper {
      * @return An array of EncodingHelperChar objects.
      */
     public EncodingHelperChar[] readFromCodepoints(String[] codepoints) {
+        EncodingHelperChar[] cdpArray = new EncodingHelperChar[codepoints.length];
+        String[] strArray = null;
+        if (codepoints.length == 1) {
+            strArray = codepoints[0].split(" ");
+            //split codepoints[0] blah blah blah
+        } else {
+            strArray = codepoints;
+        }
+        for (int i = 0; i < strArray.length; i++) {
+            if (strArray[i].startsWith("U") || strArray[i].startsWith("\\")) {
+                strArray[i] = strArray[i].substring(2);
+                cdpArray[i].setCodePoint(Integer.parseInt(strArray[i],16));
+            }
+            else if (strArray[i].startsWith("u")) {
+                strArray[i] = strArray[i].substring(1);
+                cdpArray[i].setCodePoint(Integer.parseInt(strArray[i],16));
+            }
+        }
+
         // This might take a little thinking about.
         // There's two ways to input the codepoints – as separate args, or as a
         // string. We could have two separate constructors, but it seems easier
@@ -79,17 +98,16 @@ public class EncodingHelper {
         // form U+####. Then
         //
         // for (string in String[])
-        //     string = string.substring(2) <= deletes the first 2 chars (U+)
-        //     turn it into an int somehow
-        //     call the constructor
-        //     add it to the output
-        //
-        // How do we get it to this form? If the input type is codepoint, we
-        // take the relevant args and make an array of them – or, if there's
-        // only one, we split the string? I'm not entirely sure. I'd love input.
-        // Either way, I think we need to do it in main.
+        //     string = string.substring(2) <= deletes the first 2 chars (U+) DONE
+        //     turn it into an int somehow DONE
+        //     call the constructor WHICH ONE?
+        //     add it to the output UH OK
+        // So... (4/12 @ 6:40)
+        // cdpArray is an EncodingHelperChar array of parsed ints from strArray
+        // returns cdpArray which has its codepoint set to the parsed ints
+        // I think that's correct? it looks too good to be true
 
-        return null;
+        return cdpArray;
     }
 
     /**
@@ -203,11 +221,15 @@ public class EncodingHelper {
             } else {
                 output += "String: " + EH.writeToString(EH.cpArray) + "\n";
             }
-            output += "Code point: " + EH.writeToUTF8(EH.cpArray) + "\n";
+            if (EH.cpArray.length == 1) {
+                output += "Code point: " + EH.writeToUTF8(EH.cpArray) + "\n";
+            } else {
+                output += "Code points: " + EH.writeToUTF8(EH.cpArray) + "\n";
+            }
             if (EH.cpArray.length == 1) {
                 output += "Name: " + EH.cpArray[0].getCharacterName() + "\n";
             }
-            output += "UTF8: " + EH.writeToCodepoints(EH.cpArray);
+            output += "UTF-8: " + EH.writeToCodepoints(EH.cpArray);
             System.out.println(output);
         }
     }
