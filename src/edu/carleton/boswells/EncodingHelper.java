@@ -27,13 +27,12 @@ public class EncodingHelper {
      *
      * @return An array of EncodingHelperChar objects.
      */
-    public EncodingHelperChar[] readFromString(String stringString) {
-        // make an array of the string's length
-        // for (chars in string)
-        //    array[i] = the char-based constructor
-        // return array
-
-        return null;
+    public EncodingHelperChar[] readFromString(String s) {
+        EncodingHelperChar[] codepoints = new EncodingHelperChar[s.length()];
+        for (int i = 0; i < s.length(); i++) {
+            codepoints[i] = EncodingHelperChar(s.charAt(i));
+        }
+        return codepoints;
     }
 
     /**
