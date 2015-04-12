@@ -4,9 +4,6 @@ package edu.carleton.boswells;
  * Created by stonemanm on 4/11/15.
  */
 public class EncodingHelper {
-    private String inputType = "string";
-    private String outputType = "summary";
-
     /**
      * Prints the help info.
      */
@@ -150,6 +147,28 @@ public class EncodingHelper {
      * I didn't write a method for Summary. It can be compiled from the others.
      */
     public static void main(String[] args) {
+        String inputType = "string";
+        String outputType = "summary";
+        int startingPoint = 0;
+        if (args.length == 0 || args[0].compareTo("-h") == 0 || args[0].compareTo("--help") == 0) {
+            //Run the help function and quit.
+        }
+        int i = 0
+        while (i < args.length) {
+            if (args[i].compareTo("-i") = 0 || args[i].compareTo("--input") = 0) {
+                i++;
+                inputType = args[i];
+                i++;
+                startingPoint += 2;
+            } else if (args[i].compareTo("-o") = 0 || args[i].compareTo("--output") = 0) {
+                i++;
+                outputType = args[i];
+                i++;
+                startingPoint += 2;
+            }
+        }
+        
+
         // I think the best way to read the args is to iterate through them and
         // search for an "-i", "--input", "-o", or "--output".
         // If any are found, we can save the next value and work with it – for
