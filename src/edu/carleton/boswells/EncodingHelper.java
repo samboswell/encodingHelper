@@ -17,6 +17,10 @@ public class EncodingHelper {
         System.out.println(info);
     }
 
+    public EncodingHelper() {
+
+    }
+
     /**
      * FOR STRING INPUT
      * Takes a given string and creates an EncodingHelperChar from each of the
@@ -147,13 +151,16 @@ public class EncodingHelper {
      * I didn't write a method for Summary. It can be compiled from the others.
      */
     public static void main(String[] args) {
+        EncodingHelper EH = new EncodingHelper();
         String inputType = "string";
         String outputType = "summary";
         int startingPoint = 0;
         if (args.length == 0 || args[0].compareTo("-h") == 0 || args[0].compareTo("--help") == 0) {
+            EH.useInformation();
+            System.exit(1);
             //Run the help function and quit.
         }
-        int i = 0
+        int i = 0;
         while (i < args.length) {
             if (args[i].compareTo("-i") = 0 || args[i].compareTo("--input") = 0) {
                 i++;
