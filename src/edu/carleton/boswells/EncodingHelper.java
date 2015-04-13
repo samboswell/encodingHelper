@@ -1,5 +1,7 @@
 package edu.carleton.boswells;
 import java.util.Arrays;
+import java.util.List;
+import java.util.LinkedList;
 
 /**
  * Created by stonemanm and boswells to help people who need encoding help.
@@ -47,20 +49,82 @@ public class EncodingHelper {
      *
      * @return An array of EncodingHelperChar objects.
      */
-    public EncodingHelperChar[] readFromUTF8(String stringOfBytes) {
+    public EncodingHelperChar[] readFromUTF8(String sByte) {
+        List<EncodingHelperChar> temp = new LinkedList<>();
 
-        // This one will be tougher. We have to make a byte array from the
-        // formatted string first, and that'll be a pain. Then we have to group
-        // the bytes. We can group them by iterating through, looking at the
-        // first couple bits, and then removing a corresponding number of bytes,
-        // but error checking will be a bitch. I'm not excited for it.
-        //
-        // Anyway, at the end of that, we have an array of bytearrays...
-        // for (bytearray in bytearrayarray)
-        //    array[i] = the char-based constructor
-        // return array
+        //Splits the string.
+        String[] sByteArray = null;
+        if (sByte.startsWith("\\x")) {
+            sByteArray = sByte.split("\\\\x"); //Oh my god, why.
+        } else if (sByte.startsWith("x")) {
+            sByteArray = sByte.split("x");
+        } else {
+            sByteArray = new String[sByte.length()/2];
+            for (int i = 0; i < sByteArray.length; i++) {
+                sByteArray[i] = sByte.substring(2*i, 2*i+2);
+            }
+        }
 
-        return null;
+
+        //Makes bytes out of the strings.
+        byte[] bArray = new byte[sByteArray.length - 1];
+        for (int i = 1; i < sByteArray.length; i++) { //gets rid of the empty first string.
+            bArray[i-1] = (byte) ((Character.digit(sByteArray[i].charAt(0), 16) << 4) + Character.digit(sByteArray[i].charAt(1), 16));
+        }
+
+        //Populates the LinkedList with EncodingHelperChars of the bArray bytes.
+        int j = 0;
+        while (j < bArray.length) {
+            byte[] tByte = null;
+            if ((bArray[j] >> 7) == 0) {
+                try {
+                    tByte = Arrays.copyOfRange(bArray, j, j + 1);
+                } catch (IndexOutOfBoundsException e) {
+                    System.out.println("Bytes are not a UTF-8 representation.");
+                    useInformation();
+                    System.exit(1);
+                }
+                temp.add(new EncodingHelperChar(tByte));
+            } else if (((bArray[j] >> 5) ^ 0x6) == 0 && ((bArray[j + 1] >> 6) ^ 0x2) == 0) {
+                try {
+                    tByte = Arrays.copyOfRange(bArray, j, j + 2);
+                } catch (IndexOutOfBoundsException e) {
+                    System.out.println("Bytes are not a UTF-8 representation.");
+                    useInformation();
+                    System.exit(1);
+                }
+                temp.add(new EncodingHelperChar(tByte));
+            } else if (((bArray[j] >> 4) ^ 0xE) == 0 && ((bArray[j + 1] >> 6) ^ 0x2) == 0 && ((bArray[j + 2] >> 6) ^ 0x2) == 0) {
+                try {
+                    tByte = Arrays.copyOfRange(bArray, j, j + 3);
+                } catch (IndexOutOfBoundsException e) {
+                    System.out.println("Bytes are not a UTF-8 representation.");
+                    useInformation();
+                    System.exit(1);
+                }
+                temp.add(new EncodingHelperChar(tByte));
+            } else if (((bArray[j] >> 3) ^ 0x1E) == 0 && ((bArray[j + 1] >> 6) ^ 0x2) == 0 && ((bArray[j + 2] >> 6) ^ 0x2) == 0 && ((bArray[j + 3] >> 6) ^ 0x2) == 0) {
+                try {
+                    tByte = Arrays.copyOfRange(bArray, j, j + 4);
+                } catch (IndexOutOfBoundsException e) {
+                    System.out.println("Bytes are not a UTF-8 representation.");
+                    useInformation();
+                    System.exit(1);
+                }
+                temp.add(new EncodingHelperChar(tByte));
+            } else {
+                System.out.println("Bytes are not a UTF-8 representation.");
+                useInformation();
+                System.exit(1);
+            }
+        }
+
+        //Turns the list into an array and returns.
+        EncodingHelperChar[] codepoints = new EncodingHelperChar[temp.size()];
+        for (int i = 0; i < temp.size(); i++) {
+            codepoints[i] = temp.get(i);
+        }
+        return codepoints;
     }
 
     /**
