@@ -1,8 +1,11 @@
 package edu.carleton.boswells;
 
 import org.junit.Test;
+
+import static junit.framework.Assert.assertEquals;
+
 /**
- * Created by boswells on 4/12/15.
+ * Created by stonemanm and boswells on 4/12/15.
  */
 public class EncodingHelperTest {
 
@@ -11,7 +14,7 @@ public class EncodingHelperTest {
         String input = "F";
         EncodingHelper T1 = new EncodingHelper();
         EncodingHelperChar[] t1 = T1.readFromString(input);
-        assertEquals(t1[0].getCodePoint(), 0046);
+        assertEquals("Incorrect read.",t1[0].getCodePoint(), 0x0046);
     }
 
     @Test

@@ -2,7 +2,7 @@ package edu.carleton.boswells;
 import java.util.Arrays;
 
 /**
- * Created by stonemanm on 4/11/15.
+ * Created by stonemanm and boswells on 4/11/15.
  */
 public class EncodingHelper {
     private String inputType = "string";
@@ -48,6 +48,7 @@ public class EncodingHelper {
      * @return An array of EncodingHelperChar objects.
      */
     public EncodingHelperChar[] readFromUTF8(String stringOfBytes) {
+
         // This one will be tougher. We have to make a byte array from the
         // formatted string first, and that'll be a pain. Then we have to group
         // the bytes. We can group them by iterating through, looking at the
