@@ -55,8 +55,10 @@ public class EncodingHelper {
         //Splits the string.
         String[] sByteArray = null;
         if (sByte.startsWith("\\x")) {
+            sByte = sByte.substring(2);
             sByteArray = sByte.split("\\\\x"); //Oh my god, why.
         } else if (sByte.startsWith("x")) {
+            sByte = sByte.substring(1);
             sByteArray = sByte.split("x");
         } else {
             sByteArray = new String[sByte.length()/2];
@@ -65,18 +67,17 @@ public class EncodingHelper {
             }
         }
 
-
         //Makes bytes out of the strings.
-        byte[] bArray = new byte[sByteArray.length - 1];
-        for (int i = 1; i < sByteArray.length; i++) { //gets rid of the empty first string.
-            bArray[i-1] = (byte) ((Character.digit(sByteArray[i].charAt(0), 16) << 4) + Character.digit(sByteArray[i].charAt(1), 16));
+        byte[] bArray = new byte[sByteArray.length];
+        for (int i = 0; i < sByteArray.length; i++) { //gets rid of the empty first string.
+            bArray[i] = (byte) ((Character.digit(sByteArray[i].charAt(0), 16) << 4) + Character.digit(sByteArray[i].charAt(1), 16));
         }
 
         //Populates the LinkedList with EncodingHelperChars of the bArray bytes.
         int j = 0;
         while (j < bArray.length) {
             byte[] tByte = null;
-            if ((bArray[j] >> 7) == 0) {
+            if ((bArray[j] >>> 7) == 0) {
                 try {
                     tByte = Arrays.copyOfRange(bArray, j, j + 1);
                 } catch (IndexOutOfBoundsException e) {
@@ -85,7 +86,8 @@ public class EncodingHelper {
                     System.exit(1);
                 }
                 temp.add(new EncodingHelperChar(tByte));
-            } else if (((bArray[j] >> 5) ^ 0x6) == 0 && ((bArray[j + 1] >> 6) ^ 0x2) == 0) {
+                j += 1;
+            } else if (((bArray[j] >>> 5) & 0x6) == 6 && ((bArray[j + 1] >>> 6) & 0x2) == 2) {
                 try {
                     tByte = Arrays.copyOfRange(bArray, j, j + 2);
                 } catch (IndexOutOfBoundsException e) {
@@ -94,7 +96,8 @@ public class EncodingHelper {
                     System.exit(1);
                 }
                 temp.add(new EncodingHelperChar(tByte));
-            } else if (((bArray[j] >> 4) ^ 0xE) == 0 && ((bArray[j + 1] >> 6) ^ 0x2) == 0 && ((bArray[j + 2] >> 6) ^ 0x2) == 0) {
+                j += 2;
+            } else if (((bArray[j] >>> 4) & 0xE) == 0xE && ((bArray[j + 1] >>> 6) & 0x2) == 2 && ((bArray[j + 2] >>> 6) & 0x2) == 2) {
                 try {
                     tByte = Arrays.copyOfRange(bArray, j, j + 3);
                 } catch (IndexOutOfBoundsException e) {
@@ -103,7 +106,8 @@ public class EncodingHelper {
                     System.exit(1);
                 }
                 temp.add(new EncodingHelperChar(tByte));
-            } else if (((bArray[j] >> 3) ^ 0x1E) == 0 && ((bArray[j + 1] >> 6) ^ 0x2) == 0 && ((bArray[j + 2] >> 6) ^ 0x2) == 0 && ((bArray[j + 3] >> 6) ^ 0x2) == 0) {
+                j += 3;
+            } else if (((bArray[j] >>> 3) & 0x1E) == 0x1E && ((bArray[j + 1] >>> 6) & 0x2) == 2 && ((bArray[j + 2] >>> 6) & 0x2) == 2 && ((bArray[j + 3] >>> 6) & 0x2) == 2) {
                 try {
                     tByte = Arrays.copyOfRange(bArray, j, j + 4);
                 } catch (IndexOutOfBoundsException e) {
@@ -112,10 +116,10 @@ public class EncodingHelper {
                     System.exit(1);
                 }
                 temp.add(new EncodingHelperChar(tByte));
+                j += 4;
             } else {
-                System.out.println("Bytes are not a UTF-8 representation.");
                 useInformation();
-                System.exit(1);
+                throw new IllegalArgumentException("Byte are not a UTF-8 representation.");
             }
         }
 
@@ -191,7 +195,7 @@ public class EncodingHelper {
     public String writeToString(EncodingHelperChar[] codepoints) {
         String output = "";
         for (EncodingHelperChar codepoint : codepoints) {
-            output += Character.getName(codepoint.getCodePoint());
+            output += Character.toString((char)codepoint.getCodePoint());
         }
         return output;
     }
@@ -221,7 +225,7 @@ public class EncodingHelper {
     public String writeToCodepoints(EncodingHelperChar[] codepoints) {
         String output = "";
         for (EncodingHelperChar codepoint : codepoints) {
-            output += " " + codepoint.toUtf8String();
+            output += " " + codepoint.toCodePointString();
         }
         return output.substring(1); //cuts the first space
     }
