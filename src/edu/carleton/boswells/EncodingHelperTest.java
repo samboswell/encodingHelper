@@ -16,7 +16,6 @@ public class EncodingHelperTest {
         EncodingHelperChar[] t1 = T1.readFromString(input);
         assertEquals("Incorrect read.",t1[0].getCodePoint(), 0x0046);
     }
-/**
     @Test
     public void testReadFromUTF8() throws Exception {
 
@@ -24,8 +23,13 @@ public class EncodingHelperTest {
 
     @Test
     public void testReadFromCodepoints() throws Exception {
-
+        String[] codePointArray = {"0044", "0065", "0074","004D"};
+        EncodingHelper T2 = new EncodingHelper();
+        EncodingHelperChar[] t2 = T2.readFromCodepoints(codePointArray);
+        assertEquals("Incorrect read.", t2[0].toCodePointString(), "U+0044");
     }
+
+
 
     @Test
     public void testWriteToString() throws Exception {
@@ -41,5 +45,4 @@ public class EncodingHelperTest {
     public void testWriteToCodepoints() throws Exception {
 
     }
-    */
 }

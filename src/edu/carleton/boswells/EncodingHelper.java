@@ -139,22 +139,25 @@ public class EncodingHelper {
         String[] strArray = null;
         if (codepoints.length == 1) {
             strArray = codepoints[0].split(" ");
-            //split codepoints[0] blah blah blah
         } else {
             strArray = codepoints;
         }
+
         for (int i = 0; i < strArray.length; i++) {
-            if (strArray[i].startsWith("U") || strArray[i].startsWith("\\")) {
-                strArray[i] = strArray[i].substring(2);
-                cdpArray[i].setCodePoint(Integer.parseInt(strArray[i],16));
-            }
-            else if (strArray[i].startsWith("u")) {
-                strArray[i] = strArray[i].substring(1);
-                cdpArray[i].setCodePoint(Integer.parseInt(strArray[i],16));
-            }
-            else {
-                cdpArray[i].setCodePoint(Integer.parseInt(strArray[i],16));
-            }
+            String temp = strArray[i].substring(strArray[i].length() - 4);
+            cdpArray[i] = new EncodingHelperChar(Integer.parseInt(temp,16));
+
+//            if (strArray[i].startsWith("U") || strArray[i].startsWith("\\")) {
+//                strArray[i] = strArray[i].substring(2);
+//                cdpArray[i].setCodePoint(Integer.parseInt(strArray[i],16));
+//            }
+//            else if (strArray[i].startsWith("u")) {
+//                strArray[i] = strArray[i].substring(1);
+//                cdpArray[i].setCodePoint(Integer.parseInt(strArray[i],16));
+//            }
+//            else {
+//                cdpArray[i].setCodePoint(Integer.parseInt(strArray[i],16));
+//            }
         }
 
         // This might take a little thinking about.
