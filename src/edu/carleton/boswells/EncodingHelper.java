@@ -2,7 +2,7 @@ package edu.carleton.boswells;
 import java.util.Arrays;
 
 /**
- * Created by stonemanm and boswells on 4/11/15.
+ * Created by stonemanm and boswells to help people who need encoding help.
  */
 public class EncodingHelper {
     private String inputType = "string";
@@ -86,6 +86,9 @@ public class EncodingHelper {
             }
             else if (strArray[i].startsWith("u")) {
                 strArray[i] = strArray[i].substring(1);
+                cdpArray[i].setCodePoint(Integer.parseInt(strArray[i],16));
+            }
+            else {
                 cdpArray[i].setCodePoint(Integer.parseInt(strArray[i],16));
             }
         }

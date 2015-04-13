@@ -166,6 +166,7 @@ public class EncodingHelperChar {
             }
             if (charName == null) { return "<unknown> U+" + hexString; //return for <unknown> code points
             }
+            unicodeData.close();
         }
         catch (FileNotFoundException e){
             System.err.println("File name not found");
