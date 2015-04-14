@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="44cd213d-2f0b-4ebd-977d-f3cc72e4cccd" name="Default" comment="" />
+    <list default="true" id="44cd213d-2f0b-4ebd-977d-f3cc72e4cccd" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/edu/carleton/boswells/EncodingHelper.java" afterPath="$PROJECT_DIR$/src/edu/carleton/boswells/EncodingHelper.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/edu/carleton/boswells/EncodingHelperChar.java" afterPath="$PROJECT_DIR$/src/edu/carleton/boswells/EncodingHelperChar.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/edu/carleton/boswells/EncodingHelperTest.java" afterPath="$PROJECT_DIR$/src/edu/carleton/boswells/EncodingHelperTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+    </list>
     <ignored path="EncodingHelper.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="$PROJECT_DIR$/out/" />
@@ -27,19 +32,7 @@
         <entry file="file://$PROJECT_DIR$/src/edu/carleton/boswells/EncodingHelperChar.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="176" column="63" selection-start-line="176" selection-start-column="63" selection-end-line="176" selection-end-column="63" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="EncodingHelper.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/edu/carleton/boswells/EncodingHelper.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-3.074074">
-              <caret line="111" column="59" selection-start-line="111" selection-start-column="59" selection-end-line="111" selection-end-column="59" />
+              <caret line="164" column="13" selection-start-line="164" selection-start-column="13" selection-end-line="164" selection-end-column="13" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -48,10 +41,22 @@
         </entry>
       </file>
       <file leaf-file-name="EncodingHelper.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/edu/carleton/boswells/EncodingHelper.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.44067797">
+              <caret line="153" column="76" selection-start-line="153" selection-start-column="76" selection-end-line="153" selection-end-column="76" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="EncodingHelper.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/EncodingHelper.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.12851897">
-              <caret line="7" column="1" selection-start-line="7" selection-start-column="1" selection-end-line="7" selection-end-column="1" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="4" column="44" selection-start-line="4" selection-start-column="44" selection-end-line="4" selection-end-column="44" />
               <folding />
             </state>
           </provider>
@@ -61,7 +66,7 @@
         <entry file="file://$PROJECT_DIR$/src/edu/carleton/boswells/EncodingHelperTest.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="95" column="0" selection-start-line="95" selection-start-column="0" selection-end-line="95" selection-end-column="0" />
+              <caret line="88" column="47" selection-start-line="88" selection-start-column="47" selection-end-line="88" selection-end-column="47" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -73,7 +78,7 @@
         <entry file="file://$PROJECT_DIR$/src/edu/carleton/boswells/EncodingHelperCharTest.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="35" column="65" selection-start-line="35" selection-start-column="65" selection-end-line="35" selection-end-column="65" />
+              <caret line="172" column="66" selection-start-line="172" selection-start-column="66" selection-end-line="172" selection-end-column="66" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -105,11 +110,11 @@
         <option value="$PROJECT_DIR$/src/edu/carleton/stonemanm/Main.java" />
         <option value="$PROJECT_DIR$/src/edu/carleton/stonemanm/EncodingHelperChar.java" />
         <option value="$PROJECT_DIR$/src/edu/carleton/boswells/EncodingHelperCharTest.java" />
-        <option value="$PROJECT_DIR$/src/edu/carleton/boswells/EncodingHelperChar.java" />
         <option value="$PROJECT_DIR$/src/edu/carleton/boswells/Main.java" />
-        <option value="$PROJECT_DIR$/src/edu/carleton/boswells/EncodingHelper.java" />
-        <option value="$PROJECT_DIR$/src/edu/carleton/boswells/EncodingHelperTest.java" />
         <option value="$PROJECT_DIR$/src/EncodingHelper.java" />
+        <option value="$PROJECT_DIR$/src/edu/carleton/boswells/EncodingHelperChar.java" />
+        <option value="$PROJECT_DIR$/src/edu/carleton/boswells/EncodingHelperTest.java" />
+        <option value="$PROJECT_DIR$/src/edu/carleton/boswells/EncodingHelper.java" />
       </list>
     </option>
   </component>
@@ -172,7 +177,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -227,6 +231,7 @@
       </pane>
       <pane id="PackagesPane" />
       <pane id="Scope" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -283,6 +288,32 @@
       <option name="ALTERNATIVE_JRE_PATH" />
       <option name="PACKAGE_NAME" value="edu.carleton.boswells" />
       <option name="MAIN_CLASS_NAME" value="edu.carleton.boswells.EncodingHelperTest" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
+      <method />
+    </configuration>
+    <configuration default="false" name="EncodingHelperCharTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="edu.carleton.boswells.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <module name="EncodingHelper" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="edu.carleton.boswells" />
+      <option name="MAIN_CLASS_NAME" value="edu.carleton.boswells.EncodingHelperCharTest" />
       <option name="METHOD_NAME" />
       <option name="TEST_OBJECT" value="class" />
       <option name="VM_PARAMETERS" />
@@ -462,14 +493,16 @@
       <envs />
       <method />
     </configuration>
-    <list size="2">
+    <list size="3">
       <item index="0" class="java.lang.String" itemvalue="Application.Main" />
       <item index="1" class="java.lang.String" itemvalue="JUnit.EncodingHelperTest" />
+      <item index="2" class="java.lang.String" itemvalue="JUnit.EncodingHelperCharTest" />
     </list>
     <recent_temporary>
-      <list size="2">
-        <item index="0" class="java.lang.String" itemvalue="JUnit.EncodingHelperTest" />
-        <item index="1" class="java.lang.String" itemvalue="Application.Main" />
+      <list size="3">
+        <item index="0" class="java.lang.String" itemvalue="JUnit.EncodingHelperCharTest" />
+        <item index="1" class="java.lang.String" itemvalue="JUnit.EncodingHelperTest" />
+        <item index="2" class="java.lang.String" itemvalue="Application.Main" />
       </list>
     </recent_temporary>
   </component>
@@ -495,16 +528,17 @@
       <workItem from="1428631257121" duration="736000" />
       <workItem from="1428633969573" duration="4088000" />
       <workItem from="1428874881251" duration="506000" />
-      <workItem from="1428888186334" duration="10343000" />
+      <workItem from="1428888186334" duration="11356000" />
+      <workItem from="1428971064363" duration="4247000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="39197000" />
+    <option name="totallyTimeSpent" value="44457000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="500" y="72" width="1390" height="914" extended-state="0" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -522,14 +556,14 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24532375" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.26863906" sideWeight="0.49565846" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24532375" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.26863906" sideWeight="0.49565846" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -552,6 +586,54 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/edu/carleton/boswells/EncodingHelperChar.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="176" column="63" selection-start-line="176" selection-start-column="63" selection-end-line="176" selection-end-column="63" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/edu/carleton/boswells/EncodingHelper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="246" column="49" selection-start-line="246" selection-start-column="49" selection-end-line="246" selection-end-column="49" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/EncodingHelper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/edu/carleton/boswells/EncodingHelperTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="40" column="5" selection-start-line="40" selection-start-column="5" selection-end-line="40" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/edu/carleton/boswells/EncodingHelperCharTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="35" column="65" selection-start-line="35" selection-start-column="65" selection-end-line="35" selection-end-column="65" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/edu/carleton/boswells/EncodingHelperChar.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -726,7 +808,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.4729412">
           <caret line="264" column="5" selection-start-line="264" selection-start-column="5" selection-end-line="264" selection-end-column="5" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -734,7 +815,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.3525">
           <caret line="257" column="0" selection-start-line="257" selection-start-column="0" selection-end-line="257" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -742,24 +822,31 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.3317647">
           <caret line="356" column="0" selection-start-line="356" selection-start-column="0" selection-end-line="356" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/edu/carleton/boswells/EncodingHelperCharTest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="35" column="65" selection-start-line="35" selection-start-column="65" selection-end-line="35" selection-end-column="65" />
+          <caret line="172" column="66" selection-start-line="172" selection-start-column="66" selection-end-line="172" selection-end-column="66" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/EncodingHelper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="4" column="44" selection-start-line="4" selection-start-column="44" selection-end-line="4" selection-end-column="44" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/edu/carleton/boswells/EncodingHelperChar.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="176" column="63" selection-start-line="176" selection-start-column="63" selection-end-line="176" selection-end-column="63" />
+          <caret line="164" column="13" selection-start-line="164" selection-start-column="13" selection-end-line="164" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -769,7 +856,7 @@
     <entry file="file://$PROJECT_DIR$/src/edu/carleton/boswells/EncodingHelperTest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="95" column="0" selection-start-line="95" selection-start-column="0" selection-end-line="95" selection-end-column="0" />
+          <caret line="88" column="47" selection-start-line="88" selection-start-column="47" selection-end-line="88" selection-end-column="47" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -778,19 +865,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/edu/carleton/boswells/EncodingHelper.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.074074">
-          <caret line="111" column="59" selection-start-line="111" selection-start-column="59" selection-end-line="111" selection-end-column="59" />
+        <state vertical-scroll-proportion="0.44067797">
+          <caret line="153" column="76" selection-start-line="153" selection-start-column="76" selection-end-line="153" selection-end-column="76" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/EncodingHelper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.12851897">
-          <caret line="7" column="1" selection-start-line="7" selection-start-column="1" selection-end-line="7" selection-end-column="1" />
-          <folding />
         </state>
       </provider>
     </entry>

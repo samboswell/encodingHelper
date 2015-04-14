@@ -149,22 +149,19 @@ public class EncodingHelperChar {
      */
     public String getCharacterName() {
         hexString = String.format("%04X", codePoint);
-        String charName = null;
         String[] charArray = null;
-
         try{
-            Scanner unicodeData = new Scanner(new FileReader("src/edu/carleton/boswells/UnicodeData.txt"));
-            unicodeData.useDelimiter(";");
+            Scanner unicodeData = new Scanner(new FileReader("edu/carleton/boswells/UnicodeData.txt"));
             while (unicodeData.hasNextLine()) {
-                charName = unicodeData.findInLine(hexString); //use the String format to find the code point in the file.
-                if(charName != null) { //when we find the code point,
-                    String charLine = unicodeData.nextLine(); //take that line,
-                    charArray = charLine.split(";"); //and split it.
+                String newLine = unicodeData.nextLine();
+                String nLSub = newLine.substring(0,4);
+                if(nLSub.compareTo(hexString) == 0) { //when we find the code point,
+                    charArray = newLine.split(";"); //and split it.
                     break;
                 }
-                unicodeData.nextLine();
             }
-            if (charName == null) { return "<unknown> U+" + hexString; //return for <unknown> code points
+
+            if (charArray == null) { return "<unknown> U+" + hexString; //return for <unknown> code points
             }
             unicodeData.close();
         }
@@ -172,7 +169,11 @@ public class EncodingHelperChar {
             System.err.println("File name not found");
         }
         if ((codePoint < 0x20) || codePoint >= 0x7F && codePoint < 0xA0) { //return for <control> code points
-            return  charArray[1] + " " + charArray[10];
+            String returnString = charArray[1] + " ";
+            if (charArray.length >= 11) {
+                returnString += charArray[10];
+            }
+            return returnString;
         }
         return charArray[1]; //return for all other code points
     }

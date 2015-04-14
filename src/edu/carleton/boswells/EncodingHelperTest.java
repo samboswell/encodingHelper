@@ -9,6 +9,12 @@ import static junit.framework.Assert.assertEquals;
  */
 public class EncodingHelperTest {
 
+    /**
+     * Tests reading from an input string.
+     * @throws Exception if the string's codepoint doesn't match
+     * the intended codepoint.
+     */
+
     @Test
     public void testReadFromString() throws Exception {
         String input = "F";
@@ -16,6 +22,13 @@ public class EncodingHelperTest {
         EncodingHelperChar[] t1 = T1.readFromString(input);
         assertEquals("Incorrect read.",t1[0].getCodePoint(), 0x0046);
     }
+
+    /**
+     *Tests reading from an input array of bytes.
+     * @throws Exception if the UTF8 array generated does not correspond to the
+     * array that is input.
+     */
+
     @Test
      public void testReadFromUTF8() throws Exception {
         String utf8Bytes = "\\xC9\\xA4\\xCE\\x8E\\xCF\\xA6\\x4D";
@@ -23,6 +36,12 @@ public class EncodingHelperTest {
         EncodingHelperChar[] t2 = T2.readFromUTF8(utf8Bytes);
         assertEquals("Incorrect read", t2[0].toUtf8String(), "\\xC9\\xA4");
     }
+
+    /**
+     *Tests reading from UTF8 with no backslashes.
+     * @throws Exception if the UTF8 array generated does not correspond to the
+     * array that is input.
+     */
 
     @Test
     public void testReadFromUTF8JustX() throws Exception {
@@ -32,6 +51,11 @@ public class EncodingHelperTest {
         assertEquals("Incorrect read", t2[0].toUtf8String(), "\\xC9\\xA4");
     }
 
+    /**
+     * Tests reading from UTF8 with just hex input.
+     * @throws Exception if the output does not correspond to the input array.
+     */
+
     @Test
     public void testReadFromUTF8NoStart() throws Exception {
         String utf8Bytes = "C9A4CE8ECFA64D";
@@ -39,6 +63,11 @@ public class EncodingHelperTest {
         EncodingHelperChar[] t2 = T2.readFromUTF8(utf8Bytes);
         assertEquals("Incorrect read", t2[0].toUtf8String(), "\\xC9\\xA4");
     }
+
+    /**
+     *
+     * @throws Exception
+     */
 
     @Test
     public void testReadFromCodepoints() throws Exception {
@@ -51,6 +80,27 @@ public class EncodingHelperTest {
         assertEquals("Incorrect read.", t2[3].toCodePointString(), "U+004D");
     }
 
+    /**
+     *
+     * @throws Exception
+     */
+
+    @Test
+    public void testReadFromCodepointsOneString() throws Exception {
+        String[] codePointArray = {"0044 0065 0074 004D"};
+        EncodingHelper T2 = new EncodingHelper();
+        EncodingHelperChar[] t2 = T2.readFromCodepoints(codePointArray);
+        assertEquals("Incorrect read.", t2[0].toCodePointString(), "U+0044");
+        assertEquals("Incorrect read.", t2[1].toCodePointString(), "U+0065");
+        assertEquals("Incorrect read.", t2[2].toCodePointString(), "U+0074");
+        assertEquals("Incorrect read.", t2[3].toCodePointString(), "U+004D");
+    }
+
+    /**
+     *
+     * @throws Exception
+     */
+
     @Test
     public void testReadFromCodepointsSlashU() throws Exception {
         String[] codePointArray = {"\\u0044", "\\u0065", "\\u0074","\\u004D"};
@@ -61,6 +111,11 @@ public class EncodingHelperTest {
         assertEquals("Incorrect read.", t2[2].toCodePointString(), "U+0074");
         assertEquals("Incorrect read.", t2[3].toCodePointString(), "U+004D");
     }
+
+    /**
+     *
+     * @throws Exception
+     */
 
     @Test
     public void testReadFromCodepointsJustU() throws Exception {
@@ -73,6 +128,11 @@ public class EncodingHelperTest {
         assertEquals("Incorrect read.", t2[3].toCodePointString(), "U+004D");
     }
 
+    /**
+     *
+     * @throws Exception
+     */
+
     @Test
     public void testReadFromCodepointsUPlus() throws Exception {
         String[] codePointArray = {"U+0044", "U+0065", "U+0074","U+004D"};
@@ -84,6 +144,10 @@ public class EncodingHelperTest {
         assertEquals("Incorrect read.", t2[3].toCodePointString(), "U+004D");
     }
 
+    /**
+     *
+     * @throws Exception
+     */
 
     @Test
     public void testWriteToString() throws Exception {
@@ -93,6 +157,11 @@ public class EncodingHelperTest {
         String t2 = T2.writeToString(t1);
         assertEquals("Incorrect read.", t2, "DetM");
     }
+
+    /**
+     *
+     * @throws Exception
+     */
 
     @Test
     public void testWriteToUTF8() throws Exception {
@@ -104,6 +173,11 @@ public class EncodingHelperTest {
 
 
     }
+
+    /**
+     *
+     * @throws Exception
+     */
 
     @Test
     public void testWriteToCodepoints() throws Exception {

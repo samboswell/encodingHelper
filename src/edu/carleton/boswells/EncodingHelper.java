@@ -139,48 +139,20 @@ public class EncodingHelper {
      * @return An array of EncodingHelperChar objects.
      */
     public EncodingHelperChar[] readFromCodepoints(String[] codepoints) {
-        EncodingHelperChar[] cdpArray = new EncodingHelperChar[codepoints.length];
         String[] strArray = null;
+
         if (codepoints.length == 1) {
             strArray = codepoints[0].split(" ");
         } else {
             strArray = codepoints;
         }
 
+        EncodingHelperChar[] cdpArray = new EncodingHelperChar[strArray.length];
+
         for (int i = 0; i < strArray.length; i++) {
             String temp = strArray[i].substring(strArray[i].length() - 4);
             cdpArray[i] = new EncodingHelperChar(Integer.parseInt(temp,16));
-
-//            if (strArray[i].startsWith("U") || strArray[i].startsWith("\\")) {
-//                strArray[i] = strArray[i].substring(2);
-//                cdpArray[i].setCodePoint(Integer.parseInt(strArray[i],16));
-//            }
-//            else if (strArray[i].startsWith("u")) {
-//                strArray[i] = strArray[i].substring(1);
-//                cdpArray[i].setCodePoint(Integer.parseInt(strArray[i],16));
-//            }
-//            else {
-//                cdpArray[i].setCodePoint(Integer.parseInt(strArray[i],16));
-//            }
         }
-
-        // This might take a little thinking about.
-        // There's two ways to input the codepoints – as separate args, or as a
-        // string. We could have two separate constructors, but it seems easier
-        // to write a method that parses them into the same form.
-        //
-        // The optimal form is an array of strings, where each string is of the
-        // form U+####. Then
-        //
-        // for (string in String[])
-        //     string = string.substring(2) <= deletes the first 2 chars (U+) DONE
-        //     turn it into an int somehow DONE
-        //     call the constructor WHICH ONE?
-        //     add it to the output UH OK
-        // So... (4/12 @ 6:40)
-        // cdpArray is an EncodingHelperChar array of parsed ints from strArray
-        // returns cdpArray which has its codepoint set to the parsed ints
-        // I think that's correct? it looks too good to be true
 
         return cdpArray;
     }
@@ -261,6 +233,8 @@ public class EncodingHelper {
                 EH.outputType = args[i];
                 i++;
                 EH.startingPoint += 2;
+            } else {
+                i++;
             }
         }
         String[] inArgs = null;
@@ -275,6 +249,8 @@ public class EncodingHelper {
         //Run an input function!
         if (EH.inputType.toLowerCase().compareTo("utf8") == 0) {
             EH.cpArray = EH.readFromUTF8(inArgs[0]);
+        } else if (EH.inputType.toLowerCase().compareTo("utf-8") == 0) {
+            EH.cpArray = EH.readFromUTF8(inArgs[0]);
         } else if (EH.inputType.toLowerCase().compareTo("codepoint") == 0) {
             EH.cpArray = EH.readFromCodepoints(inArgs);
         } else { //If the input is expressed differently, we assume it's string.
@@ -287,6 +263,8 @@ public class EncodingHelper {
             System.out.println(EH.writeToString(EH.cpArray));
         } else if (EH.outputType.toLowerCase().compareTo("utf8") == 0) {
             System.out.println(EH.writeToUTF8(EH.cpArray));
+        } else if (EH.outputType.toLowerCase().compareTo("utf-8") == 0) {
+            System.out.println(EH.writeToUTF8(EH.cpArray));
         } else if (EH.outputType.toLowerCase().compareTo("codepoint") == 0) {
             System.out.println(EH.writeToCodepoints(EH.cpArray));
         } else {
@@ -297,14 +275,14 @@ public class EncodingHelper {
                 output += "String: " + EH.writeToString(EH.cpArray) + "\n";
             }
             if (EH.cpArray.length == 1) {
-                output += "Code point: " + EH.writeToUTF8(EH.cpArray) + "\n";
+                output += "Code point: " + EH.writeToCodepoints(EH.cpArray) + "\n";
             } else {
-                output += "Code points: " + EH.writeToUTF8(EH.cpArray) + "\n";
+                output += "Code points: " + EH.writeToCodepoints(EH.cpArray) + "\n";
             }
             if (EH.cpArray.length == 1) {
                 output += "Name: " + EH.cpArray[0].getCharacterName() + "\n";
             }
-            output += "UTF-8: " + EH.writeToCodepoints(EH.cpArray);
+            output += "UTF-8: " + EH.writeToUTF8(EH.cpArray);
             System.out.println(output);
         }
     }
