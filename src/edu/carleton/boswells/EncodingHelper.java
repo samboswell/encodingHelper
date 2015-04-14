@@ -5,6 +5,8 @@ import java.util.LinkedList;
 
 /**
  * Created by stonemanm and boswells to help people who need encoding help.
+ * This program translates strings/codepoints/UTF8 bytes into
+ * strings/codepoints/UTF8 bytes or summaries of the input.
  */
 public class EncodingHelper {
     private String inputType = "string";

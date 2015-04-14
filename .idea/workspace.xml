@@ -3,9 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="44cd213d-2f0b-4ebd-977d-f3cc72e4cccd" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/edu/carleton/boswells/EncodingHelper.java" afterPath="$PROJECT_DIR$/src/edu/carleton/boswells/EncodingHelper.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/edu/carleton/boswells/EncodingHelperChar.java" afterPath="$PROJECT_DIR$/src/edu/carleton/boswells/EncodingHelperChar.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/edu/carleton/boswells/EncodingHelperCharTest.java" afterPath="$PROJECT_DIR$/src/edu/carleton/boswells/EncodingHelperCharTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/edu/carleton/boswells/EncodingHelperTest.java" afterPath="$PROJECT_DIR$/src/edu/carleton/boswells/EncodingHelperTest.java" />
     </list>
     <ignored path="EncodingHelper.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -28,11 +25,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="EncodingHelperChar.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="EncodingHelperChar.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/edu/carleton/boswells/EncodingHelperChar.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.48305085">
-              <caret line="151" column="44" selection-start-line="151" selection-start-column="44" selection-end-line="151" selection-end-column="44" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="153" column="38" selection-start-line="153" selection-start-column="38" selection-end-line="153" selection-end-column="38" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -40,11 +37,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="EncodingHelper.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="EncodingHelper.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/edu/carleton/boswells/EncodingHelper.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="259" column="73" selection-start-line="259" selection-start-column="73" selection-end-line="259" selection-end-column="73" />
+            <state vertical-scroll-proportion="0.20338982">
+              <caret line="8" column="59" selection-start-line="8" selection-start-column="59" selection-end-line="8" selection-end-column="59" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -111,10 +108,10 @@
         <option value="$PROJECT_DIR$/src/edu/carleton/stonemanm/EncodingHelperChar.java" />
         <option value="$PROJECT_DIR$/src/edu/carleton/boswells/Main.java" />
         <option value="$PROJECT_DIR$/src/EncodingHelper.java" />
-        <option value="$PROJECT_DIR$/src/edu/carleton/boswells/EncodingHelper.java" />
         <option value="$PROJECT_DIR$/src/edu/carleton/boswells/EncodingHelperTest.java" />
         <option value="$PROJECT_DIR$/src/edu/carleton/boswells/EncodingHelperCharTest.java" />
         <option value="$PROJECT_DIR$/src/edu/carleton/boswells/EncodingHelperChar.java" />
+        <option value="$PROJECT_DIR$/src/edu/carleton/boswells/EncodingHelper.java" />
       </list>
     </option>
   </component>
@@ -557,12 +554,12 @@
       <workItem from="1428633969573" duration="4088000" />
       <workItem from="1428874881251" duration="506000" />
       <workItem from="1428888186334" duration="11356000" />
-      <workItem from="1428971064363" duration="6797000" />
+      <workItem from="1428971064363" duration="7315000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="47007000" />
+    <option name="totallyTimeSpent" value="47525000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="500" y="72" width="1390" height="914" extended-state="0" />
@@ -853,16 +850,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/edu/carleton/boswells/EncodingHelper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="259" column="73" selection-start-line="259" selection-start-column="73" selection-end-line="259" selection-end-column="73" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/edu/carleton/boswells/EncodingHelperCharTest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -893,8 +880,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/edu/carleton/boswells/EncodingHelperChar.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.48305085">
-          <caret line="151" column="44" selection-start-line="151" selection-start-column="44" selection-end-line="151" selection-end-column="44" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="153" column="38" selection-start-line="153" selection-start-column="38" selection-end-line="153" selection-end-column="38" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/edu/carleton/boswells/EncodingHelper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.20338982">
+          <caret line="8" column="59" selection-start-line="8" selection-start-column="59" selection-end-line="8" selection-end-column="59" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
