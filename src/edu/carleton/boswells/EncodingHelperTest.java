@@ -65,8 +65,8 @@ public class EncodingHelperTest {
     }
 
     /**
-     *
-     * @throws Exception
+     *Tests reading from strings of codepoints that are each their own string.
+     * @throws Exception if the output does not correspond to the input.
      */
 
     @Test
@@ -81,8 +81,8 @@ public class EncodingHelperTest {
     }
 
     /**
-     *
-     * @throws Exception
+     *Tests reading from one string of multiple codepoints.
+     * @throws Exception if the input is read incorrectly.
      */
 
     @Test
@@ -97,8 +97,8 @@ public class EncodingHelperTest {
     }
 
     /**
-     *
-     * @throws Exception
+     *Tests reading from codepoints with a slash u prefix.
+     * @throws Exception if the codepoints are not read correctly.
      */
 
     @Test
@@ -113,8 +113,8 @@ public class EncodingHelperTest {
     }
 
     /**
-     *
-     * @throws Exception
+     * Tests reading from codepoints with a 'u' prefix.
+     * @throws Exception if the codepoints are read incorrectly.
      */
 
     @Test
@@ -129,8 +129,8 @@ public class EncodingHelperTest {
     }
 
     /**
-     *
-     * @throws Exception
+     * Tests reading from codepoints with a 'U+' prefix.
+     * @throws Exception if the codepoints are read incorrectly.
      */
 
     @Test
@@ -145,8 +145,8 @@ public class EncodingHelperTest {
     }
 
     /**
-     *
-     * @throws Exception
+     * Tests writing from codepoints to strings.
+     * @throws Exception if the codepoints are not written correctly.
      */
 
     @Test
@@ -159,8 +159,8 @@ public class EncodingHelperTest {
     }
 
     /**
-     *
-     * @throws Exception
+     * Tests writing from codepoints to UTF8.
+     * @throws Exception if the codepoints are not written correctly.
      */
 
     @Test
@@ -175,8 +175,9 @@ public class EncodingHelperTest {
     }
 
     /**
-     *
-     * @throws Exception
+     * Tests writing from codepoints to codepoints.
+     * (Should return codepoints)
+     * @throws Exception if it does not return itself.
      */
 
     @Test

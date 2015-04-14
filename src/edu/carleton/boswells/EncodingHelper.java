@@ -56,7 +56,7 @@ public class EncodingHelper {
         String[] sByteArray = null;
         if (sByte.startsWith("\\x")) {
             sByte = sByte.substring(2);
-            sByteArray = sByte.split("\\\\x"); //Oh my god, why.
+            sByteArray = sByte.split("\\\\x");
         } else if (sByte.startsWith("x")) {
             sByte = sByte.substring(1);
             sByteArray = sByte.split("x");
@@ -257,7 +257,7 @@ public class EncodingHelper {
             EH.cpArray = EH.readFromString(inArgs[0]);
         }
 
-        //By now we have EH.cpArray! So output...
+        //Now we have populated cpString, so now we can write to cpArray.
 
         if (EH.outputType.toLowerCase().compareTo("string") == 0) {
             System.out.println(EH.writeToString(EH.cpArray));

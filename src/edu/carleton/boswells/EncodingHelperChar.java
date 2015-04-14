@@ -13,7 +13,8 @@ public class EncodingHelperChar {
     private String hexString;
 
     public EncodingHelperChar(int codePoint) {
-        if (0 <= codePoint && codePoint < (0x10FFFF)) { //See if the code point lies in the valid region, return error if it doesnt.
+        if (0 <= codePoint && codePoint < (0x10FFFF)) {
+        //See if the code point lies in the valid region, return error if it is not.
             this.codePoint = codePoint;
         }
         else {
@@ -72,7 +73,8 @@ public class EncodingHelperChar {
      *
      * @return the UTF-8 byte array for this character
      */
-    public byte[] toUtf8Bytes() { //code is segmented by length of eventual byte string
+    public byte[] toUtf8Bytes() {
+    //code is segmented by length of eventual byte string
         byte[] arrayOfBytes = null;
         if (codePoint < 0x80) { //if codepoint < 128 { [0xxxxxxx] }
             arrayOfBytes = new byte[1];
@@ -115,7 +117,8 @@ public class EncodingHelperChar {
      * @return the U+ string for this character
      */
     public String toCodePointString() {
-        hexString = String.format("U+%04X", codePoint); //Used the formatting Jadrian used in his test example
+        hexString = String.format("U+%04X", codePoint);
+        //Used the formatting Jadrian used in his test example
         return hexString;
     }
 
@@ -132,7 +135,8 @@ public class EncodingHelperChar {
     public String toUtf8String() {
         byte[] encodingArray = toUtf8Bytes();
         String encodingString = "";
-        for (int i = 0; i < encodingArray.length; i++) { //Converts each array of bytes to string systematically
+        for (int i = 0; i < encodingArray.length; i++) {
+        //Converts each array of bytes to string systematically
             String encodedByte = String.format("\\x%02X", encodingArray[i]);
             encodingString = encodingString.concat(encodedByte);
         }
@@ -161,16 +165,19 @@ public class EncodingHelperChar {
                 }
             }
 
-            if (charArray == null) { return "<unknown> U+" + hexString; //return for <unknown> code points
+            if (charArray == null) { return "<unknown> U+" + hexString;
+            //return for <unknown> code points
             }
             unicodeData.close();
         }
         catch (FileNotFoundException e){
             System.err.println("File name not found");
         }
-        if ((codePoint < 0x20) || codePoint >= 0x7F && codePoint < 0xA0) { //return for <control> code points
+        if ((codePoint < 0x20) || codePoint >= 0x7F && codePoint < 0xA0) {
+        //return for <control> code points
             String returnString = charArray[1] + " ";
-            if (charArray.length >= 11) {
+            if (charArray.length >= 11) { //only <control> points with more
+                //informational names have length 11+.
                 returnString += charArray[10];
             }
             return returnString;

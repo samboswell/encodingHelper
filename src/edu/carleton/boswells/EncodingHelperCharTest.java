@@ -112,6 +112,10 @@ public class EncodingHelperCharTest {
     @Test
     /**
      * Tests outputting the code point in a string format for EncodingHelperChar.
+     * These tests do not run correctly because of the source file in IntelliJ.
+     * They work correctly from the command line, but because we are in a
+     * different directory than the EncodingHelper that is run from the
+     * command line, it cannot find the UnicodeData.txt file.
      * @exception the correct code point is not output as a string.
      */
 
@@ -133,7 +137,7 @@ public class EncodingHelperCharTest {
     @Test
     /**
      * Tests outputting the character name for a given code point in EncodingHelperChar.
-     * @exception if the character name output is not the same as the given code point's
+     * @exception The character name output is not the same as the given code point's
      * character name.
      */
     public void testGetCharacterName() throws Exception {
@@ -144,7 +148,7 @@ public class EncodingHelperCharTest {
     @Test
     /**
      * Tests outputting the character name for a given code point in the lower control range in EncodingHelperChar.
-     * @exception if the character name output is not the same as the given code point's
+     * @exception The character name output is not the same as the given code point's
      * character name.
      */
     public void testGetCharacterNameForControlCharacters() throws Exception {
@@ -155,7 +159,7 @@ public class EncodingHelperCharTest {
     @Test
     /**
      * Tests outputting the character name for a given code point in the higher control range in EncodingHelperChar.
-     * @exception if the character name output is not the same as the given code point's
+     * @exception The character name output is not the same as the given code point's
      * character name.
      */
     public void testGetCharacterNameForHigherRangeControlCharacters() throws Exception {
@@ -166,7 +170,7 @@ public class EncodingHelperCharTest {
     @Test
     /**
      * Tests outputting the character name for a given code point that is unknown in EncodingHelperChar.
-     * @exception if the character name output is not the same as the given code point's
+     * @exception The character name output is not the same as the given code point's
      * character name.
      */
     public void testGetCharacterNameForUnknownCharacters() throws Exception {
